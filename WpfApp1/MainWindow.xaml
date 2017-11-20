@@ -1,0 +1,55 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30px"/>
+                <RowDefinition Height="30px"/>
+                <RowDefinition Height="30px"/>
+                <RowDefinition Height="30px"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0">Username</Label>
+            <TextBox Grid.Row="0" Grid.Column="1" Name="fUsername"></TextBox>
+            <Label Grid.Row="1" Grid.Column="0">Password</Label>
+            <PasswordBox  Grid.Row="1" Grid.Column="1" Name="fUserpass"></PasswordBox>
+            <Label Grid.Row="2" Grid.Column="0">DB Host</Label>
+            <TextBox Grid.Row="2" Grid.Column="1" Name="fDBHost"></TextBox>
+            <Label Grid.Row="3" Grid.Column="0">Sql DB Name</Label>
+            <TextBox Grid.Row="3" Grid.Column="1" Name="fDBName"></TextBox>
+            <Button Grid.Row="0" Grid.Column="2" Click="Button_Click" >Connect</Button>
+            <Label Grid.Row="1" Grid.RowSpan="3" Grid.Column="2" Name="fStatus"></Label>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0">Query</Label>
+            <TextBox Grid.Row="0" Grid.Column="1" Name="fQuery"></TextBox>
+            <Label Grid.Row="1" Grid.Column="0">Query Results:</Label>
+            <Button Grid.Row="1" Grid.Column="1" Width="100" HorizontalAlignment="Right" Click="Button_Click_1" Name="fRunQueryButton" IsEnabled="False">Run Query</Button>
+            <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Name="fDataGrid"></DataGrid>
+        </Grid>
+    </Grid>
+</Window>
