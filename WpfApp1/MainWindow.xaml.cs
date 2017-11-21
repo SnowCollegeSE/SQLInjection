@@ -70,17 +70,7 @@ namespace WpfApp1
         }
 
         private void fRunVulnQuery_Click(object sender, RoutedEventArgs e)
-        {
-            /*** Sat Night***
-            var dataAdapter = new SqlDataAdapter(fVulnQueryText.Content.ToString(), sqlConnection);
-            DataTable dt = new DataTable();
-            dataAdapter.Fill(dt);
-            fVulnDataGrid.ItemsSource = dt.DefaultView;
-            dataAdapter.Update(dt);
-            ***/
-
-            /**** example found***/
-            SqlDataAdapter da = new SqlDataAdapter(fVulnQueryText.Content.ToString(), sqlConnection);
+        {   SqlDataAdapter da = new SqlDataAdapter(fVulnQueryText.Content.ToString(), sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);
             fVulnDataGrid.ItemsSource = dt.DefaultView;
@@ -91,8 +81,6 @@ namespace WpfApp1
         {
             try
             {
-
-
                 SqlCommand command = new SqlCommand(null, sqlConnection);
                 command.CommandText = "Select * from customer where id = @ID";
                 SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int, 0);
@@ -103,14 +91,12 @@ namespace WpfApp1
                 var dataAdapter = new SqlDataAdapter(command);
                 DataTable dt = new DataTable();
                 dataAdapter.Fill(dt);
-
-
                 fProtectedDataGrid.ItemsSource = dt.DefaultView;
                 dataAdapter.Update(dt);
             } 
-            catch (Exception f)
+            catch 
             { //I ate the exception
-                //BAD CODING PRACTICE
+              //BAD CODING PRACTICE
             }
         }
     }
