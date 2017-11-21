@@ -30,6 +30,9 @@ namespace WpfApp1
                 fStatus.Background = Brushes.Green;
                 fStatus.Content = "Connected!";
                 fRunQueryButton.IsEnabled = true;
+                fRunVulnQuery.IsEnabled = true;
+                fProtectedQuery.IsEnabled = true;
+
             }
             catch(Exception except)
             {
@@ -54,6 +57,61 @@ namespace WpfApp1
 
 
 
+        }
+
+        private void fQuery_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            fVulnQueryText.Content = "Select * from Customer where id=" + fVulnCustID.Text;
+        }
+
+        private void fProtectedCustID_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            fProtectedQueryText.Content = "Select * from Customer where id= (?)";
+        }
+
+        private void fRunVulnQuery_Click(object sender, RoutedEventArgs e)
+        {
+            /*** Sat Night***
+            var dataAdapter = new SqlDataAdapter(fVulnQueryText.Content.ToString(), sqlConnection);
+            DataTable dt = new DataTable();
+            dataAdapter.Fill(dt);
+            fVulnDataGrid.ItemsSource = dt.DefaultView;
+            dataAdapter.Update(dt);
+            ***/
+
+            /**** example found***/
+            SqlDataAdapter da = new SqlDataAdapter(fVulnQueryText.Content.ToString(), sqlConnection);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            fVulnDataGrid.ItemsSource = dt.DefaultView;
+            da.Update(dt);
+        }
+
+        private void fProtectedQuery_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+
+                SqlCommand command = new SqlCommand(null, sqlConnection);
+                command.CommandText = "Select * from customer where id = @ID";
+                SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int, 0);
+                //idParameter.Value = Int32.Parse(fProtectedCustID.Text);
+                idParameter.Value = fProtectedCustID.Text;
+                command.Parameters.Add(idParameter);
+                command.Prepare();
+                var dataAdapter = new SqlDataAdapter(command);
+                DataTable dt = new DataTable();
+                dataAdapter.Fill(dt);
+
+
+                fProtectedDataGrid.ItemsSource = dt.DefaultView;
+                dataAdapter.Update(dt);
+            } 
+            catch (Exception f)
+            { //I ate the exception
+                //BAD CODING PRACTICE
+            }
         }
     }
 }

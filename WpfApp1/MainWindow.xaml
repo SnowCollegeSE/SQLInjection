@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="650" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -17,6 +19,7 @@
                 <RowDefinition Height="30px"/>
                 <RowDefinition Height="30px"/>
                 <RowDefinition Height="30px"/>
+                <RowDefinition Height="10px"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -33,23 +36,68 @@
             <TextBox Grid.Row="3" Grid.Column="1" Name="fDBName"></TextBox>
             <Button Grid.Row="0" Grid.Column="2" Click="Button_Click" >Connect</Button>
             <Label Grid.Row="1" Grid.RowSpan="3" Grid.Column="2" Name="fStatus"></Label>
+            <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Background="Black"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
-<!--This is a comment, just so I can commit and then sync-->
+                <RowDefinition Height="10px"/>
+                <!--This is a comment, just so I can commit and then sync-->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0">Query</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Name="fQuery"></TextBox>
-            <Label Grid.Row="1" Grid.Column="0">Query Results:</Label>
-            <Button Grid.Row="1" Grid.Column="1" Width="100" HorizontalAlignment="Right" Click="Button_Click_1" Name="fRunQueryButton" IsEnabled="False">Run Query</Button>
-            <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Name="fDataGrid"></DataGrid>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">Giving Full Control to a query execution:</Label>
+            <Label Grid.Row="1" Grid.Column="0">Query</Label>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="fQuery" ></TextBox>
+            <Label Grid.Row="2" Grid.Column="0">Query Results:</Label>
+            <Button Grid.Row="2" Grid.Column="1" Width="100" HorizontalAlignment="Right" Click="Button_Click_1" Name="fRunQueryButton" IsEnabled="False">Run Query</Button>
+            <DataGrid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Name="fDataGrid"></DataGrid>
+            <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="Black"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="10px" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">Vulnerable to SQL Injection</Label>
+            <Label Grid.Row="1" Grid.Column="0">Enter Customer ID</Label>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="fVulnCustID" TextChanged="fQuery_TextChanged"/>
+            <Button Grid.Row="1" Grid.Column="2" Name="fRunVulnQuery" IsEnabled="False" Click="fRunVulnQuery_Click">Run Query</Button>
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Name="fVulnQueryText"/>
+            <DataGrid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Name="fVulnDataGrid"/>
+            <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Background="Black"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">Protected From SQL Injection</Label>
+            <Label Grid.Row="1" Grid.Column="0">Enter Customer ID</Label>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="fProtectedCustID" TextChanged="fProtectedCustID_TextChanged"/>
+            <Button Grid.Row="1" Grid.Column="2" Name="fProtectedQuery" IsEnabled="False" Click="fProtectedQuery_Click">Run Query</Button>
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Name="fProtectedQueryText"/>
+            <DataGrid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Name="fProtectedDataGrid"/>
         </Grid>
     </Grid>
 </Window>
