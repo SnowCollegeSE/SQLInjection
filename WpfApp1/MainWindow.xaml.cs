@@ -46,17 +46,10 @@ namespace WpfApp1
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var dataAdapter = new SqlDataAdapter(fQuery.Text, sqlConnection);
-
-            
             DataTable dt = new DataTable();
             dataAdapter.Fill(dt);
             fDataGrid.ItemsSource = dt.DefaultView;
             dataAdapter.Update(dt);
-
-
-
-
-
         }
 
         private void fQuery_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -84,7 +77,6 @@ namespace WpfApp1
                 SqlCommand command = new SqlCommand(null, sqlConnection);
                 command.CommandText = "Select * from customer where id = @ID";
                 SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int, 0);
-                //idParameter.Value = Int32.Parse(fProtectedCustID.Text);
                 idParameter.Value = fProtectedCustID.Text;
                 command.Parameters.Add(idParameter);
                 command.Prepare();
@@ -95,8 +87,7 @@ namespace WpfApp1
                 dataAdapter.Update(dt);
             } 
             catch 
-            { //I ate the exception
-              //BAD CODING PRACTICE
+            { //I ate the exception //BAD CODING PRACTICE
             }
         }
     }
